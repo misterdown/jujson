@@ -79,10 +79,10 @@ int main() {
     jujson::json_value<std::string> jsonObj = parser.parse_json_object_expected();
 
     if (jsonObj.is_valid()) {
-        std::cout << "Parsed JSON: " << jsonObj.to_string() << std::endl;
+        std::cout << "Parsed JSON: " << jsonObj.to_string() << '\n';
         return 0;
     } else {
-        std::cerr << "Error parsing JSON: " << parser.get_last_error() << std::endl;
+        std::cerr << "Error parsing JSON: " << parser.get_last_error() << '\n';
         return 1;
     }
 
@@ -104,26 +104,26 @@ int main() {
         // Accessing string value
         auto nameKV = jsonObj.find("name");
         if (nameKV != jsonObj.get_childs().end()) {
-            std::cout << "Name: " << nameKV->value().data() << std::endl;
+            std::cout << "Name: " << nameKV->value().data() << '\n';
         }
 
         // Accessing number value
         auto ageKV = jsonObj.find("age");
         if (ageKV != jsonObj.get_childs().end()) {
-            std::cout << "Age: " << ageKV->value().data() << std::endl;
+            std::cout << "Age: " << ageKV->value().data() << '\n';
         }
 
         // Accessing boolean value
         auto isStudentKV = jsonObj.find("isStudent");
         if (isStudentKV != jsonObj.get_childs().end()) {
-            std::cout << "Is Student: " << isStudentKV->value().data() << std::endl;
+            std::cout << "Is Student: " << isStudentKV->value().data() << '\n';
         }
 
         // Accessing array value
         auto coursesKV = jsonObj.find("courses");
         if (coursesKV != jsonObj.get_childs().end()) {
             for (const auto& courseKVs : coursesKV->value().get_childs()) {
-                std::cout << "Course: " << courseKVs.data() << std::endl;
+                std::cout << "Course: " << courseKVs.data() << '\n';
             }
         }
         return 0;
@@ -159,10 +159,10 @@ int main() {
     jujson::json_value<std::string> jsonObj = parser.parse_json_object_expected();
 
     if (jsonObj.is_valid()) {
-        std::cout << "Parsed JSON: " << jsonObj.to_string() << std::endl;
+        std::cout << "Parsed JSON: " << jsonObj.to_string() << '\n';
         return 0;
     } else {
-        std::cerr << "Error parsing JSON: " << parser.get_last_error() << std::endl;
+        std::cerr << "Error parsing JSON: " << parser.get_last_error() << '\n';
         return 1;
     }
     return 0;
