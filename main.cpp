@@ -99,7 +99,7 @@ bool accessing() {
 }
 bool custom_type_test() {
     std::cout << "custom type test\n";
-    std::string jsonStr = "{<name>: <John>, <age>: 30, <isStudent>: false, <courses>: [<Math>, <Science>]}";
+    std::string jsonStr = "{<name>: <John>, <age>: 30, <isStudent>: false, <courses>: [<Math - <about geometry>>, <Science>]}";
 
     jujson::json_parser<std::string, custom_trait> parser(jsonStr);
     jujson::json_value<std::string, custom_trait> jsonObj = parser.parse_json_object_expected();
