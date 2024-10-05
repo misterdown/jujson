@@ -1,4 +1,4 @@
-/*  
+/*  jujson.hpp
     MIT License
 
     Copyright (c) 2024 Aidar Shigapov
@@ -396,21 +396,31 @@ namespace jujson {
         StringT_ parse_string_litteral() {
             auto b = current_;
             bool slash = false;
+            JUJSON_SIZE_TYPE beginsCount = 1;
             for (auto val = *current_; current_ != end_; ++current_, val = *current_) { // pass to string itteral end
+                slash = false;
                 if (json_traits::is_escape_spec(val)) {
                     slash = true;
-                } else if ((!slash) && json_traits::is_string_litteral_end(val))  {
                     ++current_;
                     ++column_;
-                    return StringT_(b, current_ - 1);
+                    continue;
                 }
-                if (json_traits::is_new_line(val)) {
+                if ((!slash) && json_traits::is_string_litteral_end(val)) {
+                    --beginsCount;
+                    ++column_;
+                } else if ((!slash) && json_traits::is_string_litteral_begin(val))  {
+                    ++beginsCount;
+                    ++column_;
+                } else if (json_traits::is_new_line(val)) {
                     column_ = 0;
                     ++line_;
                 } else {
                     ++column_;
                 }
-                slash = false;
+                if (beginsCount == 0) {
+                    ++current_;
+                    return StringT_(b, current_ - 1);
+                }
             }
             lastError_ = JUJSON_ERROR_CODE_EOF;
             return StringT_();
